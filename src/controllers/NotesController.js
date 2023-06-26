@@ -6,7 +6,7 @@ class NotesController{
         const { title, description, tags, links } = request.body
         const  user_id  = request.user.id
 
-        const {note_id} = await knex('notes').insert({
+        const note_id = await knex('notes').insert({
             title,
             description,
             user_id
@@ -79,6 +79,7 @@ class NotesController{
             .whereIn('name', filterTags)
             .innerJoin('notes', 'notes.id', 'tags.note_id')
             .orderBy('notes.title')
+            .groupBy('notes.id')
         
         } else {   
         
