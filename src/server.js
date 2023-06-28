@@ -1,3 +1,5 @@
+require("dotenv/config")
+
 require('express-async-errors') // importing the library for excepetions treatment
 const AppError = require('./utils/AppError.js')
 const migrationsRun = require('./database/sqlite/migrations')
@@ -42,7 +44,7 @@ const { userRoutes } = require('./routes/users.routes)
 However, all routes can be grouped in the index.js file, and then all routes needed for the app can be gathered there.
 */
 
-const PORT = 3333; // here it is defined the adress (port) which the API shall be waiting for a request and returning the response
+const PORT = process.env.API_PORT || 3333; // here it is defined the adress (port) which the API shall be waiting for a request and returning the response
 
 app.listen(PORT, () => { 
     console.log(`Server is running on Port ${PORT}.`)
